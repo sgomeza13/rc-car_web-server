@@ -39,20 +39,26 @@ body {
     display: flex;
     width: min-content;
     flex-direction: column;
-    padding-left: 140px;
-
+    padding-left: 45;
+    justify-items: center;
+    justify-content: center;
+    margin: auto;
+    justify-content: center;
   }
   .container-side{
-
     display: flex;
-    padding-left: 70px;
+    padding-left: 0px;
     width: min-content;
+    margin: auto;
     gap: 30px;
+    justify-content: center;
+    justify-content: center;
   }
 
 .box {
-    margin: 100px;
-    padding-left: 100px;
-    width: min-content;
-
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
 }

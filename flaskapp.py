@@ -1,10 +1,14 @@
 from flask import Flask, render_template, request
-import time
+from datetime import time
+
 app = Flask(__name__)
 
 @app.route("/", methods=["GET", "POST"])
 def home():
-    return render_template("index.html")
+    legend = 'Monthly Data'
+    labels = ["January", "February", "March", "April", "May", "June", "July", "August"]
+    values = [10, 9, 8, 7, 6, 4, 7, 8]
+    return render_template("index.html", values=values, labels=labels, legend=legend)
 
 @app.route('/adelante')
 def adelante():
@@ -30,6 +34,8 @@ def derecha():
 def detener():
     print("detener")
     return ("true")
-            
-app.run(host= "0.0.0.0", port= 8000)
+           
+
+if __name__ == "__main__":
+    app.run(host= "0.0.0.0", port= 8000)
 
