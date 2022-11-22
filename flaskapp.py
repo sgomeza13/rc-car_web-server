@@ -2,17 +2,27 @@ from flask import Flask, render_template, request
 from datetime import time
 import random
 import serial
-
+import datetime
+labels = []
+values = []
 ser = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
 app = Flask(__name__)
 
 @app.route("/", methods=["GET", "POST"])
 def home():
+    temp = random.randint(10,40)
+    hora = datetime.datetime.now()
+    horaFormato = f'{hora.hour}:{hora.minute}:{hora.second}'
     legend = 'Temperatura'
-    labels = [  '12:00PM', '12:10PM', '12:20PM', '12:30PM', '12:40PM', '12:50PM',
-                '1:00PM', '1:10PM', '1:20PM', '1:30PM', '1:40PM', '1:50PM',
-                '2:00PM', '2:10PM', '2:20PM', '2:30PM', '2:40PM', '2:50PM']
-    values = [random.randint(10,40) for _ in range(17)]
+    if (len(labels) <= 20): 
+        labels.append(horaFormato)
+        values.append(temp)
+    labels.pop()
+    values.pop()
+    labels.append(horaFormato)
+    values.append(temp)
+    print(labels)
+    print(values)
     return render_template("index.html", values=values, labels=labels, legend=legend)
 
 @app.route('/adelante')
