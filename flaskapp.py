@@ -1,6 +1,9 @@
 from flask import Flask, render_template, request
 from datetime import time
 import random
+import serial
+
+ser = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
 app = Flask(__name__)
 
 @app.route("/", methods=["GET", "POST"])
@@ -14,6 +17,7 @@ def home():
 
 @app.route('/adelante')
 def adelante():
+    ser.write(b'set on\n')
     print("adelante")
     return ("true")
 
@@ -34,6 +38,7 @@ def derecha():
 
 @app.route('/detener')
 def detener():
+    ser.write(b'set off\n')
     print("detener")
     return ("true")
            
